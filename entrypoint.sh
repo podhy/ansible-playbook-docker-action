@@ -2,10 +2,6 @@
 
 set -e
 
-pwd
-
-ls -al
-
 # Evaluate keyfile
 export KEYFILE=
 if [ ! -z "$INPUT_KEYFILE" ]
