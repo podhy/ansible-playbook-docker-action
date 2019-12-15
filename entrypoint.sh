@@ -10,15 +10,16 @@ ls -al
 export KEYFILE=
 if [ ! -z "$INPUT_KEYFILE" ]
 then
+  mkdir -p ~/.ssh
   echo "\$INPUT_KEYFILE is set. Will use ssh keyfile for host connections."
   if [ ! -z "$INPUT_KEYFILEVAULTPASS" ]
   then
     echo "Using \$INPUT_KEYFILE_VAULT_PASS to decrypt keyfile."
-    mkdir -p ~/.ssh
     echo "${INPUT_KEYFILEVAULTPASS}" > ~/.ssh/vault_key
     ansible-vault decrypt ${INPUT_KEYFILE} --vault-password-file ~/.ssh/vault_key
   fi
-  export KEYFILE="--key-file ${INPUT_KEYFILE}"
+  echo "${INPUT_KEYFILE}" > ~/.ssh/vault_key
+  export KEYFILE="--key-file ~/.ssh/vault_key"
 else
   echo "\$INPUT_KEYFILE not set. You'll most probably only be able to work on localhost."
 fi
