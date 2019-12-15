@@ -2,6 +2,9 @@
 
 set -e
 
+ls -al
+ls -al build/
+
 # Evaluate keyfile
 export KEYFILE=
 if [ ! -z "$INPUT_KEYFILE" ]
